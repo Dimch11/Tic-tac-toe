@@ -1,16 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
-public enum CellContent
+public enum NoughtsAndCrossesCell
 {
+    Empty,
     Nought,
     Cross
 }
 
-public class NoughtsAndCrossesField
+public class NoughtsAndCrossesField : Field<NoughtsAndCrossesCell>
 {
-    public CellContent this[int heightPos, int widthPos]
+    public override NoughtsAndCrossesCell this[int heightPos, int widthPos]
     {
         get 
         {
@@ -21,16 +20,46 @@ public class NoughtsAndCrossesField
             TrySetCell(heightPos, widthPos, value);
         }
     }
+    public override int Height { get => cells.GetLength(0); }
+    public override int Width { get => cells.GetLength(1); }
 
-    CellContent[,] cells;
+    const int DefaultFieldHeight = 3;
+    const int DefaultFieldWidth = 3;
 
+    NoughtsAndCrossesCell[,] cells;
+
+
+    public NoughtsAndCrossesField()
+    {
+        cells = new NoughtsAndCrossesCell[DefaultFieldHeight, DefaultFieldWidth];
+
+        Clear();
+    }
     public NoughtsAndCrossesField(int height, int width)
     {
-        cells = new CellContent[height, width];
+        cells = new NoughtsAndCrossesCell[height, width];
+
+        Clear();
+    }
+    
+
+    public override void Clear()
+    {
+        for (int i = 0; i < cells.GetLength(0); i++)
+        {
+            for (int j = 0; j < cells.GetLength(1); j++)
+            {
+                ClearCell(i, j);
+            }
+        }
     }
 
+    public override void ClearCell(int heightPos, int widthPos)
+    {
+        cells[heightPos, widthPos] = NoughtsAndCrossesCell.Empty;
+    }
 
-    private CellContent TryGetCell(int heightPos, int widthPos)
+    private NoughtsAndCrossesCell TryGetCell(int heightPos, int widthPos)
     {
         if (CellExists(heightPos, widthPos))
         {
@@ -42,7 +71,7 @@ public class NoughtsAndCrossesField
         }
     }
 
-    private void TrySetCell(int heightPos, int widthPos, CellContent cellContent)
+    private void TrySetCell(int heightPos, int widthPos, NoughtsAndCrossesCell cellContent)
     {
         if (CellExists(heightPos, widthPos))
         {
