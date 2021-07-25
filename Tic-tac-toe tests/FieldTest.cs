@@ -26,24 +26,5 @@ namespace Tic_tac_toe_tests
 
             Assert.AreEqual(field[0, 0], NoughtsAndCrossesCell.Empty);
         }
-
-        [TestMethod]
-        public void TestGeneratedFieldDoesntContainsEmptyCells()
-        {
-            var rndFieldGenerator = new RandomNoughtsAndCrossesFieldGenerator();
-
-            var field = rndFieldGenerator.GenerateField();
-
-            for (int i = 0; i < field.Height; i++)
-            {
-                for (int j = 0; j < field.Width; j++)
-                {
-                    if (field[i, j] == NoughtsAndCrossesCell.Empty)
-                    {
-                        Assert.Fail();
-                    }
-                }
-            }
-        }
     }
 }
