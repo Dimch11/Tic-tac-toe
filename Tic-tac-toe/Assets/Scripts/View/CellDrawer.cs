@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CellDrawer : MonoBehaviour
+public class CellDrawer : MonoBehaviour
 {
     public GameObject CellPrefab;
     public float CellSize
@@ -11,7 +11,7 @@ public abstract class CellDrawer : MonoBehaviour
     }
     public GameObject this[int heightPos, int widthPos]
     {
-        get => displayedCells[(heightPos + 1) * widthPos];
+        get => displayedCells[heightPos * (int)Mathf.Sqrt(displayedCells.Count) + widthPos];
     }
 
     protected List<GameObject> displayedCells = new List<GameObject>();

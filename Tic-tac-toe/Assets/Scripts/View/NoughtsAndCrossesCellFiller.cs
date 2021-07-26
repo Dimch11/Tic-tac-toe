@@ -19,7 +19,7 @@ public class NoughtsAndCrossesCellFiller : MonoBehaviour, ICellFiller<NoughtsAnd
         }
         else
         {
-            throw new ArgumentException();
+            ClearCell(cell);
         }
     }
     public void ClearCell(GameObject cell)

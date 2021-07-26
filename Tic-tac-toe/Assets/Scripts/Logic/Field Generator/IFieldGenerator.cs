@@ -2,5 +2,5 @@
 
 public interface IFieldGenerator<T>
 {
-    Field<T> GenerateField();
+    void GenerateField(Field<T> field);
 }

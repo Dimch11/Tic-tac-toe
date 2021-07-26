@@ -5,10 +5,8 @@ public class RandomNoughtsAndCrossesFieldGenerator : IFieldGenerator<NoughtsAndC
 {
     Random rnd = new Random();
 
-    public Field<NoughtsAndCrossesCell> GenerateField()
+    public void GenerateField(Field<NoughtsAndCrossesCell> field)
     {
-        var field = new NoughtsAndCrossesField();
-
         for (int i = 0; i < field.Height; i++)
         {
             for (int j = 0; j < field.Width; j++)
@@ -16,8 +14,6 @@ public class RandomNoughtsAndCrossesFieldGenerator : IFieldGenerator<NoughtsAndC
                 field[i, j] = GenerateNoughtOrCross();
             }
         }
-
-        return field;
     }
 
     private NoughtsAndCrossesCell GenerateNoughtOrCross()
